@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown to Our Meeting ❤️</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    
+    <!-- Add audio element -->
+    <audio id="bgMusic" loop>
+        <source src="0.mp3" type="audio/mpeg">
+    </audio>
+</head>
+<body>
+    <div class="loading-screen" role="alert" aria-live="assertive">
+        <div class="loading-heart"></div>
+        <div class="loading-text">Loading our love story...</div>
+    </div>
+    <div class="hearts" aria-hidden="true"></div>
+    <div class="stars-container" aria-hidden="true"></div>
+    
+    <div class="left-container">
+        <div class="info-section">
+            <div class="time-zones">
+                <div class="time-location">
+                    <h4>Lebanon</h4>
+                    <div id="yourTime" class="time-display" aria-live="polite"></div>
+                </div>
+                <div class="time-location">
+                    <h4>Germany</h4>
+                    <div id="theirTime" class="time-display" aria-live="polite"></div>
+                </div>
+            </div>
+        </div>
+        <div id="map" style="height: 400px; width: 100%;"></div>
+        <div class="distance-display">
+            <h3>Distance Between Us</h3>
+            <div id="distance" class="distance-number" aria-live="polite"></div>
+        </div>
+    </div>
+    
+    <div class="right-container">
+        <h3>Milestones</h3>
+        <ul class="milestone-list">
+            <li class="milestone-item" data-days="10">
+                <span class="milestone-icon">❤️</span>
+                <span class="milestone-text">10 Days Together</span>
+            </li>
+            <li class="milestone-item" data-days="30">
+                <span class="milestone-icon">❤️</span>
+                <span class="milestone-text">30 Days Together</span>
+            </li>
+            <li class="milestone-item" data-days="60">
+                <span class="milestone-icon">❤️</span>
+                <span class="milestone-text">60 Days Together</span>
+            </li>
+            <li class="milestone-item" data-days="100">
+                <span class="milestone-icon">❤️</span>
+                <span class="milestone-text">100 Days Together</span>
+            </li>
+            <li class="milestone-item" data-days="150">
+                <span class="milestone-icon">❤️</span>
+                <span class="milestone-text">150 Days Together</span>
+            </li>
+            <li class="milestone-item" data-days="200">
+                <span class="milestone-icon">❤️</span>
+                <span class="milestone-text">200 Days Together</span>
+            </li>
+            <li class="milestone-item" data-days="400">
+                <span class="milestone-icon">❤️</span>
+                <span class="milestone-text">400 Days Together</span>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="container" role="main">
+        <h1>Counting Down Until I See You ❤️</h1>
+        
+        <!-- Interactive Love Letter -->
+        <div class="love-letter">
+            <button id="revealButton" onclick="startReveal()" aria-controls="special-message">💌 Read My Letter</button>
+            <div id="special-message" class="letter-text" role="region" aria-live="polite"></div>
+        </div>
+
+        <div class="stats">
+            <div class="together-counter">
+                <div class="heart-animation" aria-hidden="true"></div>
+                <p>Together for <span id="days-together" aria-live="polite">0</span> days</p>
+            </div>
+        </div>
+        <p class="message">Every second brings us closer together...</p>
+        <div class="countdown" role="timer" aria-live="polite">
+            <div class="time-block">
+                <div class="number" id="days">00</div>
+                <div class="label">Days</div>
+            </div>
+            <div class="time-block">
+                <div class="number" id="hours">00</div>
+                <div class="label">Hours</div>
+            </div>
+            <div class="time-block">
+                <div class="number" id="minutes">00</div>
+                <div class="label">Minutes</div>
+            </div>
+            <div class="time-block">
+                <div class="number" id="seconds">00</div>
+                <div class="label">Seconds</div>
+            </div>
+        </div>
+        <p class="date">Our Special Day ✨</p>
+
+        <!-- Add after the countdown div -->
+        <div class="garden-container">
+            <h3>Our Love Garden 🌸</h3>
+            <div class="garden">
+                <div class="garden-plot">
+                    <!-- Initial seed/flower will be added by JavaScript -->
+                </div>
+            </div>
+            <div class="garden-legend">
+                <div class="legend-item">
+                    <span class="flower">🌺</span>
+                    <span>10 Days</span>
+                </div>
+                <div class="legend-item">
+                    <span class="flower">🌷</span>
+                    <span>30 Days</span>
+                </div>
+                <div class="legend-item">
+                    <span class="flower">🌸</span>
+                    <span>60 Days</span>
+                </div>
+                <div class="legend-item">
+                    <span class="flower">🌹</span>
+                    <span>100 Days</span>
+                </div>
+                <div class="legend-item">
+                    <span class="flower">🌻</span>
+                    <span>150 Days</span>
+                </div>
+                <div class="legend-item">
+                    <span class="flower">🌼</span>
+                    <span>200 Days</span>
+                </div>
+                <div class="legend-item">
+                    <span class="flower">🌺</span>
+                    <span>400 Days</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="hearts-container" aria-hidden="true"></div>
+    <div class="music-controls">
+        <button id="toggleMusic" class="music-button">🎵</button>
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.04">
+    </div>
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</body>
+</html>
